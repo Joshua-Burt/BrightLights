@@ -255,6 +255,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55949d1c620ef4a769b59b8f00aca8a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerSpeed: 25
+  jumpHeight: 3
+  gravityValue: 9.81
 --- !u!4 &144990379 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4928250434816837875, guid: 95379150b18642a4d95d80b34921a3ff,

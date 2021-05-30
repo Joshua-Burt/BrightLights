@@ -23,16 +23,16 @@ public class TPMCameraMove : MonoBehaviour
 	private float currentY = 0.0f;
 
 
-	void LateUpdate()
-	{
-		currentX += Input.GetAxis("Mouse X") * sensivity * Time.deltaTime;
-		currentY += Input.GetAxis("Mouse Y") * sensivity * Time.deltaTime;
+	void LateUpdate() {
+		if(Input.GetMouseButton(1)) {
+			currentX += Input.GetAxis("Mouse X") * sensivity * Time.deltaTime;
+			currentY += Input.GetAxis("Mouse Y") * sensivity * Time.deltaTime;
 
-		currentY = Mathf.Clamp(currentY, Y_MIN, Y_MAX);
-
+			currentY = Mathf.Clamp(currentY, Y_MIN, Y_MAX);
+		}
 		Vector3 Direction = new Vector3(0, 0, -distance);
 		Quaternion rotation = Quaternion.Euler(currentY, currentX, 0);
-		
+
 		if(!yInverted) {
 			transform.position = lookAt.position + rotation * Direction * -1;
 		} else {
