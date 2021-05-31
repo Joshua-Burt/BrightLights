@@ -25,8 +25,8 @@ public class TPMPlayerMove : MonoBehaviour {
 	}
 
 	void Update() {
-		float Horizontal = Input.GetAxis("Horizontal") * playerSpeed * 100 * Time.deltaTime;
-		float Vertical = Input.GetAxis("Vertical") * playerSpeed * 100 * Time.deltaTime;
+		float Horizontal = Input.GetAxis("Horizontal") * playerSpeed;
+		float Vertical = Input.GetAxis("Vertical") * playerSpeed;
 		
 		var camTransform = _cam.transform;
 		
@@ -41,14 +41,14 @@ public class TPMPlayerMove : MonoBehaviour {
 		
 		if(controller.isGrounded) {
 			if(Input.GetAxis("Jump") != 0) {
-				playerVelocity.y += jumpHeight * gravityValue;
+				playerVelocity.y += jumpHeight / gravityValue;
 			} else {
 				// Using -0.1f instead of 0 as it prevents an issue where
-				// the character will toggle between 
+				// the character will toggle between isGrounded
 				playerVelocity.y = -0.1f;
 			}
 		} else {
-			playerVelocity.y -= Mathf.Sqrt(gravityValue * Time.deltaTime);
+			playerVelocity.y -= gravityValue * Time.deltaTime;
 		}
 
 		Movement += playerVelocity;

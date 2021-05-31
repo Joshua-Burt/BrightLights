@@ -54,9 +54,23 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Planet.cs" />
      <Compile Include="Assets\Scripts\TPMCameraMove.cs" />
+     <Compile Include="Assets\Scripts\FrameLimiter.cs" />
+     <Compile Include="Assets\Scripts\Density\SphereDensity.cs" />
      <Compile Include="Assets\Scripts\TPMPlayerMove.cs" />
+     <Compile Include="Assets\Scripts\Density\DensityGenerator.cs" />
+     <Compile Include="Assets\Scripts\Helper\ConditionalHideAttribute.cs" />
+     <Compile Include="Assets\Scripts\ColourGenerator.cs" />
      <Compile Include="Assets\Scripts\CubeSphere.cs" />
      <Compile Include="Assets\Scripts\PlanetCreation.cs" />
+     <Compile Include="Assets\Scripts\Density\NoiseDensity.cs" />
+     <Compile Include="Assets\Scripts\MeshGenerator.cs" />
+     <Compile Include="Assets\Scripts\Chunk.cs" />
+     <None Include="Assets\Scripts\Compute\Includes\Density.compute" />
+     <None Include="Assets\Scripts\Compute\MarchingCubes.compute" />
+     <None Include="Assets\Scripts\Compute\Includes\Noise.compute" />
+     <None Include="Assets\Scripts\Compute\Includes\MarchTables.compute" />
+     <None Include="Assets\Scripts\Compute\SphereDensity.compute" />
+     <None Include="Assets\Scripts\Compute\NoiseDensity.compute" />
  <Reference Include="UnityEngine">
  <HintPath>C:/Program Files/Unity/Hub/Editor/2020.2.5f1/2020.3.10f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
  </Reference>
