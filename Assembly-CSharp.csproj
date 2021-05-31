@@ -52,7 +52,9 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Planet.cs" />
+     <Compile Include="Assets\Scripts\Celestials\Planet.cs" />
+     <Compile Include="Assets\Scripts\Celestials\CubeSphere.cs" />
+     <Compile Include="Assets\Scripts\Celestials\Star.cs" />
      <Compile Include="Assets\Scripts\TPMCameraMove.cs" />
      <Compile Include="Assets\Scripts\FrameLimiter.cs" />
      <Compile Include="Assets\Scripts\Density\SphereDensity.cs" />
@@ -60,9 +62,9 @@
      <Compile Include="Assets\Scripts\Density\DensityGenerator.cs" />
      <Compile Include="Assets\Scripts\Helper\ConditionalHideAttribute.cs" />
      <Compile Include="Assets\Scripts\ColourGenerator.cs" />
-     <Compile Include="Assets\Scripts\CubeSphere.cs" />
      <Compile Include="Assets\Scripts\PlanetCreation.cs" />
      <Compile Include="Assets\Scripts\Density\NoiseDensity.cs" />
+     <Compile Include="Assets\Scripts\Celestials\StarGenerator.cs" />
      <Compile Include="Assets\Scripts\MeshGenerator.cs" />
      <Compile Include="Assets\Scripts\Chunk.cs" />
      <None Include="Assets\Scripts\Compute\Includes\Density.compute" />

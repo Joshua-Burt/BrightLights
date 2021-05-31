@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Celestials;
 using UnityEngine;
 
 public class PlanetCreation : MonoBehaviour
