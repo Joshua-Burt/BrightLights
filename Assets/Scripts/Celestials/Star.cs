@@ -1,34 +1,26 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Celestials {
-    public class Star : MonoBehaviour {
+    public class Star : CubeSphere {
         public List<Planet> orbitingPlanets;
         public Color baseColor;
-        
-        public Material Material1;
-        public Material Material2;
-        public Material Material3;
+        public string type;
 
         // Start is called before the first frame update
         void Start() {
             createMesh();
         }
-        
-        void createMesh() {
-            gameObject.AddComponent<MeshRenderer>();
-            MeshRenderer renderer = gameObject.GetComponent<MeshRenderer>();
-            Material[] materials = new Material[3];
-            
-            materials[0] = Material1;
-            materials[1] = Material2;
-            materials[2] = Material3;
 
-            renderer.materials = materials;
-            
-            CubeSphere sphere = gameObject.AddComponent<CubeSphere>();
-            sphere.Initialize(100,100);
+        private void createMesh() {
+            transform.position = new Vector3(0,0,0);
+
+            int size = Random.Range(3000, 5000);
+            Initialize(100, size);
         }
+
 
         public bool addPlanet(Planet planet) {
             if(planet != null) {

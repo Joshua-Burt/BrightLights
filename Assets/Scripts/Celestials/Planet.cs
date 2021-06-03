@@ -1,17 +1,19 @@
 ﻿using UnityEngine;
 
 namespace Celestials {
-    public class Planet : MonoBehaviour {
-        public float radius = 2;
-        private GameObject planet;
-        // Start is called before the first frame update
+    public class Planet : CubeSphere {
+        public Color baseColor;
+        
         void Start() {
-            planet = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            createMesh();
         }
 
-        // Update is called once per frame
-        void Update() {
-            planet.transform.localScale = new Vector3(radius,radius,radius);
+        public void createMesh() {
+            transform.position =
+                new Vector3(0,0,0);
+
+            int size = Random.Range(500, 1250);
+            Initialize(100, size);
         }
     }
 }
