@@ -6,6 +6,7 @@ using UnityEngine;
 namespace Player {
     public class Player : MonoBehaviour {
         public float speed = 10;
+        public float runSpeed = 20;
         public float jumpPower = 10;
         public bool firstPerson = true;
         public GameObject skin;

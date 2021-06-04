@@ -1,70 +1,72 @@
 using System;
 using System.Numerics;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 
 namespace Player.PlayerMovement.Camera {
     public class FirstPersonPlayerMove : MonoBehaviour {
-        public float mouseXSensitivity = 50f;
-        public float mouseYSensitivity = 50f;
-
+        public float mouseXSensitivity = 100f;
+        public float mouseYSensitivity = 100f;
+        public LayerMask groundedMask;
+        
         private Rigidbody _rigidbody;
         private Player _player;
         private Transform _transform;
         private UnityEngine.Camera _camera;
-        private Collider _collider;
+        private float verticalLookRotation;
+        private Vector3 smoothMoveVelocity;
+        private Vector3 Movement;
+        private bool grounded;
 
         void Awake() {
             _player = GetComponent<Player>();
             _rigidbody = GetComponent<Rigidbody>();
             _camera = UnityEngine.Camera.main;
 
-            _collider = _player.skin.GetComponent<CapsuleCollider>();
-
             _transform = transform;
-            // if(_camera != null) {
-            //     _camera.transform.position = _player.transform.position;
-            // }
+
+            int layer1 = 6;
+            int layer2 = 7;
+
+            LayerMask mask1 = 1 << layer1;
+            LayerMask mask2 = 1 << layer2;
+            
+            groundedMask.value = mask1 | mask2;
         }
 
         void Update() {
             // Player Movement
-            float Horizontal = Input.GetAxis("Horizontal") * _player.speed;
-            float Vertical = Input.GetAxis("Vertical") * _player.speed;
 
-            Vector3 Movement = _transform.right * Horizontal + _transform.forward * Vertical + _rigidbody.velocity;
+            float mouseX = Input.GetAxisRaw("Mouse X") * mouseXSensitivity * Time.deltaTime;
+            float mouseY = Input.GetAxisRaw("Mouse Y") * mouseYSensitivity * Time.deltaTime;
             
-            if(Input.GetAxis("Jump") != 0) {
-                if(IsGrounded()) {
-                    Debug.Log("JUMPING");
-                    Movement += _transform.up * _player.jumpPower;
+            _transform.Rotate(Vector3.up * mouseX);
+            verticalLookRotation += mouseY;
+            verticalLookRotation = Mathf.Clamp(verticalLookRotation, -60, 60);
+            _camera.transform.localEulerAngles = Vector3.left * verticalLookRotation;
+
+            Vector3 moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
+            Vector3 targetMoveAmount = moveDir * _player.speed;
+            Movement = Vector3.SmoothDamp(Movement, targetMoveAmount, ref smoothMoveVelocity, .15f);
+
+            if(Input.GetButtonDown("Jump")) {
+                if(grounded) {
+                    _rigidbody.AddForce(_transform.up * _player.jumpPower);
                 }
-            } else {
-                Debug.Log("NOT JUMPING");
             }
 
-            _transform.Translate(Movement * Time.deltaTime);
+            grounded = false;
+            Ray ray = new Ray(_transform.position, -_transform.up);
+            RaycastHit hit;
             
-            // Player Camera Movement
-            
-            float mouseX = Input.GetAxisRaw("Mouse X") * mouseXSensitivity;
-            float mouseY = Input.GetAxisRaw("Mouse Y") * mouseYSensitivity;
-
-
-            if(mouseX != 0 || mouseY != 0) {
-                var transformRotation = _transform.rotation;
-                var cameraRotation = _camera.transform.rotation;
-                transformRotation.y += mouseX;
-                cameraRotation.x += mouseY;
-                
-                _transform.rotation.Set(0,transformRotation.y,0,0);
-                _camera.transform.rotation.Set(cameraRotation.x,0,0,0);
+            if(Physics.Raycast(ray, out hit, 2 + 0.1f,groundedMask)) {
+                grounded = true;
             }
         }
-        
-        bool IsGrounded() {
-            var bounds = _collider.bounds;
-            return Physics.CheckCapsule(bounds.center,new Vector3(bounds.center.x,bounds.min.y-0.1f,bounds.center.z),1);
+
+        private void FixedUpdate() {
+            _rigidbody.MovePosition(_rigidbody.position + _transform.TransformDirection(Movement) * Time.fixedDeltaTime);
         }
     }
 }

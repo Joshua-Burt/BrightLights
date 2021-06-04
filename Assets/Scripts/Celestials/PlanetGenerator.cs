@@ -3,16 +3,28 @@ using UnityEngine;
 
 namespace Celestials {
     public class PlanetGenerator : MonoBehaviour {
-        private List<GameObject> planets;
         public GameObject planetObj;
+        public float maxSize = 1000;
+        public float minSize = 500;
         [Header("Number of Planets")] public int numOfPlanets = 1;
 
+
+        private List<GameObject> planets;
 
         // Start is called before the first frame update
         void Start() {
             for(int i = 0; i < numOfPlanets; i++) {
                 GameObject planet = Instantiate(planetObj);
                 planet.name = "Planet " + i;
+                
+                Planet component = planet.GetComponent<Planet>();
+
+                if(maxSize < minSize) {
+                    maxSize = minSize;
+                }
+                
+                component.planetRadius = Random.Range(minSize, maxSize);
+                component.createMesh();
             }
         }
 
