@@ -52,23 +52,25 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\Player\Player.cs" />
      <Compile Include="Assets\Scripts\Celestials\Planet.cs" />
      <Compile Include="Assets\Scripts\Celestials\CubeSphere.cs" />
      <Compile Include="Assets\Scripts\Celestials\Star.cs" />
      <Compile Include="Assets\Scripts\Celestials\PlanetGenerator.cs" />
-     <Compile Include="Assets\Scripts\ThirdPersonCameraMove.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerMovement\Camera\ThirdPersonCameraMove.cs" />
      <Compile Include="Assets\Scripts\FrameLimiter.cs" />
      <Compile Include="Assets\Scripts\Density\SphereDensity.cs" />
-     <Compile Include="Assets\Scripts\ThirdPersonPlayerMove.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerMovement\Camera\ThirdPersonPlayerMove.cs" />
      <Compile Include="Assets\Scripts\Density\DensityGenerator.cs" />
      <Compile Include="Assets\Scripts\Helper\ConditionalHideAttribute.cs" />
-     <Compile Include="Assets\GravityAttractor.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerMovement\GravityAttractor.cs" />
      <Compile Include="Assets\Scripts\ColourGenerator.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerMovement\Camera\FirstPersonPlayerMove.cs" />
      <Compile Include="Assets\Scripts\Density\NoiseDensity.cs" />
      <Compile Include="Assets\Scripts\Celestials\StarGenerator.cs" />
      <Compile Include="Assets\Scripts\MeshGenerator.cs" />
      <Compile Include="Assets\Scripts\Chunk.cs" />
-     <Compile Include="Assets\GravityBody.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerMovement\GravityBody.cs" />
      <None Include="Assets\Scripts\Compute\Includes\Density.compute" />
      <None Include="Assets\Scripts\Compute\MarchingCubes.compute" />
      <None Include="Assets\Scripts\Compute\Includes\Noise.compute" />
