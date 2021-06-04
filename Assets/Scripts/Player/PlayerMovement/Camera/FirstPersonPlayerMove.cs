@@ -6,12 +6,13 @@ using Vector3 = UnityEngine.Vector3;
 
 namespace Player.PlayerMovement.Camera {
     public class FirstPersonPlayerMove : MonoBehaviour {
-        public float mouseXSensitivity = 100f;
-        public float mouseYSensitivity = 100f;
+        public float mouseXSensitivity = 150f;
+        public float mouseYSensitivity = 150f;
         public LayerMask groundedMask;
-        
+
+        private CapsuleCollider _playerCollider;
         private Rigidbody _rigidbody;
-        private Player _player;
+        private Player _playerComp;
         private Transform _transform;
         private UnityEngine.Camera _camera;
         private float verticalLookRotation;
@@ -20,12 +21,15 @@ namespace Player.PlayerMovement.Camera {
         private bool grounded;
 
         void Awake() {
-            _player = GetComponent<Player>();
+            _playerCollider = GetComponentInChildren<CapsuleCollider>();
+                _playerComp = GetComponent<Player>();
             _rigidbody = GetComponent<Rigidbody>();
             _camera = UnityEngine.Camera.main;
 
             _transform = transform;
 
+
+            // Setting the proper layers to the layer mask
             int layer1 = 6;
             int layer2 = 7;
 
@@ -43,16 +47,16 @@ namespace Player.PlayerMovement.Camera {
             
             _transform.Rotate(Vector3.up * mouseX);
             verticalLookRotation += mouseY;
-            verticalLookRotation = Mathf.Clamp(verticalLookRotation, -60, 60);
+            verticalLookRotation = Mathf.Clamp(verticalLookRotation, -80, 80);
             _camera.transform.localEulerAngles = Vector3.left * verticalLookRotation;
 
             Vector3 moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
-            Vector3 targetMoveAmount = moveDir * _player.speed;
-            Movement = Vector3.SmoothDamp(Movement, targetMoveAmount, ref smoothMoveVelocity, .15f);
+            Vector3 targetMoveAmount = moveDir * _playerComp.speed;
+            Movement = Vector3.SmoothDamp(Movement, targetMoveAmount, ref smoothMoveVelocity, .01f);
 
             if(Input.GetButtonDown("Jump")) {
                 if(grounded) {
-                    _rigidbody.AddForce(_transform.up * _player.jumpPower);
+                    _rigidbody.AddForce(_transform.up * _playerComp.jumpPower);
                 }
             }
 
@@ -60,7 +64,7 @@ namespace Player.PlayerMovement.Camera {
             Ray ray = new Ray(_transform.position, -_transform.up);
             RaycastHit hit;
             
-            if(Physics.Raycast(ray, out hit, 2 + 0.1f,groundedMask)) {
+            if(Physics.Raycast(ray, out hit, _playerCollider.height + 0.1f,groundedMask)) {
                 grounded = true;
             }
         }

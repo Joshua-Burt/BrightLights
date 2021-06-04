@@ -24,6 +24,13 @@ namespace Celestials {
                 }
                 
                 component.planetRadius = Random.Range(minSize, maxSize);
+                planet.GetComponent<SphereCollider>().radius = component.planetRadius * 9;
+
+                if(component.hasParentStar) {
+                    component.center = FindObjectOfType<Star>().transform;
+                    component.rotationSpeed = 0.01f;
+                }
+
                 component.createMesh();
             }
         }

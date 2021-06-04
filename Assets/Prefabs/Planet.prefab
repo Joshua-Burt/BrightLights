@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -8705773848739299590}
   - component: {fileID: 6180187569271964850}
   - component: {fileID: 6015593349103196936}
+  - component: {fileID: -5994945393611947844}
   m_Layer: 0
   m_Name: Planet
   m_TagString: Planet
@@ -49,6 +50,13 @@ MonoBehaviour:
   gridSize: 20
   radius: 10
   baseColor: {r: 0, g: 0, b: 0, a: 0}
+  planetRadius: 500
+  orbitRadius: 10000
+  gravitationalInfluence: 0
+  center: {fileID: 0}
+  axis: {x: 0, y: 1, z: 0}
+  radiusSpeed: 0.5
+  rotationSpeed: 80
 --- !u!23 &-8705773848739299590
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -68,9 +76,9 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 446fde69242ded048bd30432cdcebd1f, type: 2}
-  - {fileID: 2100000, guid: 446fde69242ded048bd30432cdcebd1f, type: 2}
-  - {fileID: 2100000, guid: 446fde69242ded048bd30432cdcebd1f, type: 2}
+  - {fileID: 2100000, guid: e8e0a908ef896ea4ca427af47a85947c, type: 2}
+  - {fileID: 2100000, guid: e8e0a908ef896ea4ca427af47a85947c, type: 2}
+  - {fileID: 2100000, guid: e8e0a908ef896ea4ca427af47a85947c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -113,3 +121,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravity: -9.81
+--- !u!135 &-5994945393611947844
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2427724350045111636}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 100
+  m_Center: {x: 0, y: 0, z: 0}

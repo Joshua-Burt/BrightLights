@@ -1,4 +1,5 @@
 using System.Threading;
+using Celestials;
 using Player.PlayerMovement.Camera;
 using PlayerMovement.Camera;
 using UnityEngine;
@@ -23,7 +24,7 @@ namespace Player {
                 gameObject.AddComponent<FirstPersonPlayerMove>();
                 if(Camera.main is { }) {
                     Camera.main.transform.parent = _playerModel.transform;
-                    Camera.main.transform.position = _playerModel.transform.position + new Vector3(0, 0.25f, 1);
+                    Camera.main.transform.position = _playerModel.transform.position + new Vector3(0, 1f, 1);
                 }
             } else {
                 gameObject.AddComponent<ThirdPersonCameraMove>();
@@ -33,6 +34,22 @@ namespace Player {
 
         void Update() {
             _transform.position = _playerModel.transform.position;
+
+            if(currentCelestialBody != null) {
+                currentCelestialBody.GetComponent<Planet>().Orbit(_transform);
+            }
+        }
+        
+        private void OnTriggerEnter(Collider enterCollider) {
+            if(enterCollider.CompareTag("Planet")) {
+                currentCelestialBody = enterCollider.gameObject;
+            }
+        }
+        
+        private void OnTriggerExit(Collider enterCollider) {
+            if(enterCollider.CompareTag("Planet")) {
+                currentCelestialBody = null;
+            }
         }
     }
 }

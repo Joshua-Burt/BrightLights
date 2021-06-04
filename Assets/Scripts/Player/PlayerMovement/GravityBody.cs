@@ -21,8 +21,8 @@ namespace Player.PlayerMovement {
         }
     
         IEnumerator FindPlanet() {
-            yield return new WaitUntil(() => GameObject.FindGameObjectWithTag("Planet") != null);
-            planet = GameObject.FindGameObjectWithTag("Planet");
+            yield return new WaitUntil(() => _player.currentCelestialBody != null);
+            planet = _player.currentCelestialBody;
             _attractor = planet.GetComponent<GravityAttractor>();
             _isAttractorNotNull = true;
 
@@ -30,7 +30,7 @@ namespace Player.PlayerMovement {
         }
 
         private void FixedUpdate() {
-            if(_isAttractorNotNull) {
+            if(_player.currentCelestialBody != null && _isAttractorNotNull) {
                 _attractor.Attract(transform);
             }
         }
