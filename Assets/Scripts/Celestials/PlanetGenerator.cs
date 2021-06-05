@@ -24,11 +24,14 @@ namespace Celestials {
                 }
                 
                 component.planetRadius = Random.Range(minSize, maxSize);
+                
+                // Setting the sphere of influence of the planet, 9x the radius
                 planet.GetComponent<SphereCollider>().radius = component.planetRadius * 9;
 
-                if(component.hasParentStar) {
-                    component.center = FindObjectOfType<Star>().transform;
+                if(GameObject.FindGameObjectWithTag("Star")) {
+                    component.hasParentStar = true;
                     component.rotationSpeed = 0.01f;
+                    component.orbitRadius = Random.Range(10000, 20000);
                 }
 
                 component.createMesh();

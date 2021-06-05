@@ -1,10 +1,11 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Celestials {
     public class Planet : CubeSphere {
         public Color baseColor;
         public float planetRadius = 500;
-        public float orbitRadius = 10000;
+        public float orbitRadius;
         public float gravitationalInfluence = 100;
 
         public Transform center;
@@ -15,22 +16,13 @@ namespace Celestials {
         public bool hasParentStar;
 
         public void createMesh() {
+            if(hasParentStar) {
+                center = GameObject.FindGameObjectWithTag("Star").transform;
+                transform.position = new Vector3(1,0,0) * orbitRadius + center.position;
+            }
+            
             Initialize(100, planetRadius);
             gameObject.layer = 6;
-        }
-
-        void Start() {
-            if(GameObject.FindGameObjectWithTag("Star")) {
-                hasParentStar = true;
-
-                center = GameObject.FindGameObjectWithTag("Star").transform;
-
-                transform.position = (transform.position - center.position).normalized * orbitRadius + center.position;
-            } else {
-                hasParentStar = false;
-            }
-
-
         }
 
         void Update() {
@@ -40,10 +32,8 @@ namespace Celestials {
         public void Orbit(Transform _transform) {
             if(hasParentStar) {
                 _transform.RotateAround(center.position, axis, rotationSpeed * Time.deltaTime);
-                var desiredPosition =
-                    (_transform.position - center.position).normalized * orbitRadius + center.position;
-                _transform.position =
-                    Vector3.MoveTowards(_transform.position, desiredPosition, Time.deltaTime * radiusSpeed);
+                var desiredPosition = (_transform.position - center.position).normalized * orbitRadius + center.position;
+                _transform.position = Vector3.MoveTowards(_transform.position, desiredPosition, Time.deltaTime * radiusSpeed);
             }
         }
     }

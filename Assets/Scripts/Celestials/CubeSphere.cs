@@ -7,7 +7,7 @@ namespace Celestials {
 		public int gridSize = 20;
 		public float radius = 600f;
 
-		protected Mesh mesh;
+		private Mesh mesh;
 		private Vector3[] vertices;
 		private Vector3[] normals;
 		private Color32[] cubeUV;

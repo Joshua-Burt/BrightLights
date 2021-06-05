@@ -44,11 +44,17 @@ namespace Player.PlayerMovement.Camera {
 
             float mouseX = Input.GetAxisRaw("Mouse X") * mouseXSensitivity * Time.deltaTime;
             float mouseY = Input.GetAxisRaw("Mouse Y") * mouseYSensitivity * Time.deltaTime;
-            
-            _transform.Rotate(Vector3.up * mouseX);
-            verticalLookRotation += mouseY;
-            verticalLookRotation = Mathf.Clamp(verticalLookRotation, -80, 80);
-            _camera.transform.localEulerAngles = Vector3.left * verticalLookRotation;
+
+
+            if(_playerComp.currentCelestialBody != null) {
+                _transform.Rotate(Vector3.up * mouseX);
+                verticalLookRotation += mouseY;
+
+                verticalLookRotation = Mathf.Clamp(verticalLookRotation, -80, 80);
+                _camera.transform.localEulerAngles = Vector3.left * verticalLookRotation;
+            } else {
+                _transform.Rotate(Vector3.up * mouseX + Vector3.left * mouseY);
+            }
 
             Vector3 moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
             Vector3 targetMoveAmount = moveDir * _playerComp.speed;
