@@ -69,6 +69,7 @@
      <Compile Include="Assets\Scripts\Density\NoiseDensity.cs" />
      <Compile Include="Assets\Scripts\Celestials\StarGenerator.cs" />
      <Compile Include="Assets\Scripts\MeshGenerator.cs" />
+     <Compile Include="Assets\Scripts\Ship.cs" />
      <Compile Include="Assets\Scripts\Chunk.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMovement\GravityBody.cs" />
      <None Include="Assets\Scripts\Compute\Includes\Density.compute" />

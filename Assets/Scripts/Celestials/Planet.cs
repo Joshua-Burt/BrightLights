@@ -2,6 +2,7 @@
 using UnityEngine;
 
 namespace Celestials {
+    [RequireComponent(typeof(GravityAttractor))]
     public class Planet : CubeSphere {
         public Color baseColor;
         public float planetRadius = 500;
@@ -11,7 +12,7 @@ namespace Celestials {
         public Transform center;
         public Vector3 axis = Vector3.up;
         public float radiusSpeed = 0.5f;
-        public float rotationSpeed = 80.0f;
+        public float rotationSpeed = 0.01f;
 
         public bool hasParentStar;
 
@@ -27,13 +28,19 @@ namespace Celestials {
 
         void Update() {
             Orbit(transform);
+            transform.rotation = Quaternion.identity;
         }
 
         public void Orbit(Transform _transform) {
             if(hasParentStar) {
-                _transform.RotateAround(center.position, axis, rotationSpeed * Time.deltaTime);
-                var desiredPosition = (_transform.position - center.position).normalized * orbitRadius + center.position;
-                _transform.position = Vector3.MoveTowards(_transform.position, desiredPosition, Time.deltaTime * radiusSpeed);
+                var centerPosition = center.position;
+                _transform.RotateAround(centerPosition, axis, rotationSpeed * Time.deltaTime);
+                
+                // var position = _transform.position;
+                //
+                // var desiredPosition = (position - centerPosition).normalized * orbitRadius + centerPosition;
+                // position = Vector3.MoveTowards(position, desiredPosition, Time.deltaTime * radiusSpeed);
+                // _transform.position = position;
             }
         }
     }
