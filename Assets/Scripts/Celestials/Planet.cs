@@ -27,7 +27,7 @@ namespace Celestials {
         private void Start() {
             shapeSettings = gameObject.GetComponent<ShapeSettings>();
             colourSettings = gameObject.GetComponent<ColourSettings>();
-            
+
             colourSettings.OnVariableChange += OnColourSettingsUpdated;
 
             if(meshFilters == null) {
@@ -41,7 +41,7 @@ namespace Celestials {
             planetCollider.radius = shapeSettings.planetRadius;
             triggerCollider.radius = shapeSettings.planetRadius * 5;
         }
-
+        
         void Initialize() {
             shapeGenerator = new ShapeGenerator(shapeSettings);
 

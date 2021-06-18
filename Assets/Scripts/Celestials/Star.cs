@@ -19,9 +19,9 @@ namespace Celestials {
         void Start() {
             transform.position = new Vector3(0, 0, 0);
 
-            int size = Random.Range(3000, 5000);
+            int size = Random.Range(3000, 5000) * 100;
 
-            sphere = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            sphere = GameObject.Find("Icosphere");
             sphere.transform.localScale = new Vector3(size, size, size);
             sphere.transform.parent = gameObject.transform;
 

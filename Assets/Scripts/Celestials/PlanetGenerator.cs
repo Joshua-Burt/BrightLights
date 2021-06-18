@@ -21,8 +21,8 @@ namespace Celestials {
 
                 if(GameObject.FindGameObjectWithTag("Star")) {
                     component.hasParentStar = true;
-                    component.orbitalSpeed = 0.01f;
                     component.orbitRadius = Random.Range(10000, 20000);
+                    component.orbitalSpeed = 1/component.orbitRadius * 100;
                 }
 
                 component.colourSettings.planetColour = Random.ColorHSV();
