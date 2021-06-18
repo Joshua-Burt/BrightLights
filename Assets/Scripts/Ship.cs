@@ -19,7 +19,14 @@ public class Ship : MonoBehaviour {
         if(enterCollider.CompareTag("Planet")) {
             currentCelestialBody = enterCollider.gameObject;
             _attractor = currentCelestialBody.GetComponent<GravityAttractor>();
+            _transform.parent = currentCelestialBody.transform;
         }
+    }
+
+    public void Disengage() {
+        currentCelestialBody = null;
+        _attractor = null;
+        _transform.parent = null;
     }
 
     private void OnTriggerExit(Collider exitCollider) {
@@ -30,7 +37,7 @@ public class Ship : MonoBehaviour {
     }
     
     private void FixedUpdate() {
-        if(currentCelestialBody != null) {
+        if(currentCelestialBody != null && !isBeingFlown) {
             _attractor.Attract(_transform);
         }
     }

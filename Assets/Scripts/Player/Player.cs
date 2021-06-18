@@ -39,31 +39,31 @@ namespace Player {
             }
         }
 
-        void Update() {
-            // _transform.position = _playerModel.transform.position;
-
-            if(currentCelestialBody != null) {
-                currentCelestialBody.GetComponent<Planet>().Orbit(_transform);
-            }
-        }
-        
         private void OnTriggerEnter(Collider enterCollider) {
             if(enterCollider.CompareTag("Planet")) {
                 currentCelestialBody = enterCollider.gameObject;
-                
+                transform.parent = currentCelestialBody.transform;
             } else if(enterCollider.transform.CompareTag("Ship")) {
                 currentShip = enterCollider.gameObject;
+                
                 // Make sure the player's rotation is lined up with the ship
                 _transform.rotation = Quaternion.FromToRotation(_transform.up, enterCollider.transform.up) * _transform.rotation;
+                transform.parent = currentShip.transform;
             }
         }
         
         private void OnTriggerExit(Collider exitCollider) {
             if(exitCollider.CompareTag("Planet")) {
                 currentCelestialBody = null;
+
+                if(currentShip == null) {
+                    transform.parent = null;
+                }
             } else if(exitCollider.transform.CompareTag("Ship")) {
                 currentShip = null;
                 _cam.transform.forward = _transform.forward;
+
+                transform.parent = currentCelestialBody == null ? null : currentCelestialBody.transform;
             }
         }
     }
