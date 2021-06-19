@@ -56,9 +56,11 @@ namespace Player.PlayerMovement.Camera {
 
                 verticalLookRotation = Mathf.Clamp(verticalLookRotation, -80, 80);
                 _camera.transform.localEulerAngles = Vector3.left * verticalLookRotation;
-            // If in empty space, rotate the whole model
+                _playerComp.speed = Player.walkSpeed;
+                // If in empty space, rotate the whole model
             } else {
                 _transform.Rotate(Vector3.up * mouseX + Vector3.left * mouseY);
+                _playerComp.speed = Player.flySpeed;
             }
 
             Vector3 moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
@@ -78,6 +80,8 @@ namespace Player.PlayerMovement.Camera {
             if(Physics.Raycast(ray, out hit, _playerCollider.height / 2 + 0.1f,groundedMask)) {
                 grounded = true;
             }
+            
+            
         }
 
         private void FixedUpdate() {

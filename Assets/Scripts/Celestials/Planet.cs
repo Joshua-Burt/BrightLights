@@ -40,6 +40,14 @@ namespace Celestials {
 
             planetCollider.radius = shapeSettings.planetRadius;
             triggerCollider.radius = shapeSettings.planetRadius * 5;
+            
+            GameObject star = GameObject.FindGameObjectWithTag("Star");
+            hasParentStar = star != null;
+
+            if(hasParentStar) {
+                center = star.transform;
+                transform.position = new Vector3(1, 0, 0) * orbitRadius + center.position;
+            }
         }
         
         void Initialize() {
@@ -65,14 +73,6 @@ namespace Celestials {
                 }
 
                 terrainFaces[i] = new TerrainFace(shapeGenerator, meshFilters[i].sharedMesh, resolution, directions[i]);
-            }
-
-            GameObject star = GameObject.FindGameObjectWithTag("Star");
-            hasParentStar = star != null;
-
-            if(hasParentStar) {
-                center = star.transform;
-                transform.position = new Vector3(1, 0, 0) * orbitRadius + center.position;
             }
         }
 
@@ -114,6 +114,8 @@ namespace Celestials {
                 transform.RotateAround(center.position, axis, orbitalSpeed * Time.deltaTime);
             }
 
+            
+            
             // Rotate around planet's axis (Day/Night type rotation)
             transform.Rotate(axis, rotationalSpeed * Time.deltaTime);
         }

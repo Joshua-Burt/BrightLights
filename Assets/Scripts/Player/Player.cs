@@ -6,8 +6,10 @@ using UnityEngine;
 
 namespace Player {
     public class Player : MonoBehaviour {
+        public const float walkSpeed = 10;
+        public const float runSpeed = 20;
+        public const float flySpeed = 200;
         public float speed = 10;
-        public float runSpeed = 20;
         public float jumpPower = 300;
         public bool firstPerson = true;
         public GameObject skin;
@@ -45,7 +47,7 @@ namespace Player {
                 transform.parent = currentCelestialBody.transform;
             } else if(enterCollider.transform.CompareTag("Ship")) {
                 currentShip = enterCollider.gameObject;
-                
+
                 // Make sure the player's rotation is lined up with the ship
                 _transform.rotation = Quaternion.FromToRotation(_transform.up, enterCollider.transform.up) * _transform.rotation;
                 transform.parent = currentShip.transform;
