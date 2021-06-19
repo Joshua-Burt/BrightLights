@@ -29,7 +29,8 @@ namespace Celestials {
             colourSettings = gameObject.GetComponent<ColourSettings>();
 
             colourSettings.OnVariableChange += OnColourSettingsUpdated;
-
+            shapeSettings.OnVariableChange += OnShapeSettingsUpdated;
+            
             if(meshFilters == null) {
                 GenerateMesh();
             }
@@ -82,14 +83,14 @@ namespace Celestials {
             GenerateColours();
         }
 
-        public void OnShapeSettingsUpdated() {
+        private void OnShapeSettingsUpdated() {
             if(autoUpdate) {
                 Initialize();
                 GenerateMesh();
             }
         }
 
-        public void OnColourSettingsUpdated() {
+        private void OnColourSettingsUpdated() {
             if(autoUpdate) {
                 Initialize();
                 GenerateColours();
@@ -113,8 +114,6 @@ namespace Celestials {
                 // Rotate around star's axis (Year type rotation)
                 transform.RotateAround(center.position, axis, orbitalSpeed * Time.deltaTime);
             }
-
-            
             
             // Rotate around planet's axis (Day/Night type rotation)
             transform.Rotate(axis, rotationalSpeed * Time.deltaTime);
