@@ -686,6 +686,9 @@
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Users/JoshuaBurt/git/Unity/BrightLights/Bright Lights/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
  </Reference>
+ <Reference Include="Unity.2D.Sprite.Editor">
+ <HintPath>C:/Users/JoshuaBurt/git/Unity/BrightLights/Bright Lights/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">

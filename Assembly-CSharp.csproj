@@ -69,6 +69,7 @@
      <Compile Include="Assets\Scripts\Player\PlayerMovement\GravityAttractor.cs" />
      <Compile Include="Assets\Scripts\ColourGenerator.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMovement\Camera\FirstPersonPlayerMove.cs" />
+     <Compile Include="Assets\Scripts\PlanetHoverOverlay.cs" />
      <Compile Include="Assets\Scripts\Celestials\Planet.cs" />
      <Compile Include="Assets\ShapeGenerator.cs" />
      <Compile Include="Assets\Scripts\Density\NoiseDensity.cs" />
@@ -683,6 +684,9 @@
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Users/JoshuaBurt/git/Unity/BrightLights/Bright Lights/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="Unity.2D.Sprite.Editor">
+ <HintPath>C:/Users/JoshuaBurt/git/Unity/BrightLights/Bright Lights/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
  </Reference>
   </ItemGroup>
   <ItemGroup>

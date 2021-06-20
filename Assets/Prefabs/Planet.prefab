@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3629347393671006183}
   - component: {fileID: 3629347393671006187}
   - component: {fileID: 3629347393671006180}
+  - component: {fileID: -1744462853179709962}
   m_Layer: 6
   m_Name: Planet
   m_TagString: Planet
@@ -154,3 +155,16 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-1744462853179709962
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3629347393671006178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec39c080af8460c47a2f8acae4c3cab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 7871436846068676188, guid: 92ce2f02b53fef54c9a4bd8fdca74f28, type: 3}
