@@ -7,9 +7,10 @@ using UnityEngine;
 
 namespace Player {
     public class Player : MonoBehaviour {
-        public const float walkSpeed = 10;
-        public const float runSpeed = 20;
-        public const float flySpeed = 200;
+        private const float walkSpeed = 10;
+        private const float runSpeed = 20;
+        private const float flySpeed = 200;
+        
         public float speed = 10;
         public float jumpPower = 300;
         public bool firstPerson = true;
@@ -73,7 +74,14 @@ namespace Player {
 
             Vector3 moveDir = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical")).normalized;
             Vector3 targetMoveAmount = moveDir * speed;
-            Movement = Vector3.SmoothDamp(Movement, targetMoveAmount, ref smoothMoveVelocity, .01f);
+                
+            // When in empty space, smooth out motion to seem more space-y
+            if(currentCelestialBody != null || currentShip != null) {
+                Movement = Vector3.SmoothDamp(Movement, targetMoveAmount, ref smoothMoveVelocity, .01f);
+            } else {
+                Movement = Vector3.SmoothDamp(Movement, targetMoveAmount, ref smoothMoveVelocity, 1f);
+            }
+            
             
             grounded = false;
             Ray ray = new Ray(_transform.position, -_transform.up);

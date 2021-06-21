@@ -12,9 +12,6 @@ namespace Player.PlayerMovement.Camera {
         public float mouseXSensitivity = 150f;
         public float mouseYSensitivity = 150f;
 
-
-        private CapsuleCollider _playerCollider;
-        
         private Player _playerComp;
         private Transform _transform;
         private UnityEngine.Camera _camera;
@@ -23,7 +20,6 @@ namespace Player.PlayerMovement.Camera {
         
 
         void Awake() {
-            _playerCollider = GetComponentInChildren<CapsuleCollider>();
             _playerComp = GetComponent<Player>();
             _camera = UnityEngine.Camera.main;
             _transform = transform;
