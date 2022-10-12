@@ -1,6 +1,7 @@
 # BrightLights
 
-A tech test for myself to try making a procedural solar system.
+A tech test for myself to try making a procedural orbiting solar system.
+
 Planets can be walked on when moving close enough for the gravity to take hold.
 
 ![Cursor pointing at a planet, showing distance and orbital period](https://github.com/Joshua-Burt/BrightLights/blob/master/BL1.png)
